@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -44,7 +42,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import jfxtras.labs.scene.control.window.Window;
+//import jfxtras.labs.scene.control.window.Window;
 
 
 public class Main extends Application{
@@ -58,11 +56,11 @@ public class Main extends Application{
 	Menu loginBarMenu, registerBarMenu, userAccountBarMenu, userUserBarMenu, cartAccountBarMenu, cartUserBarMenu, historyAccountBarMenu, historyUserBarMenu, adminAccountBarMenu, adminAdminBarMenu;
 	MenuItem loginBarItem, registerBarItem, userAccountBarItem, userHomeBarItem, userCartBarItem, cartAccountBarItem, cartHomeBarItem, cartCartBarItem, cartHistoryBarItem, historyAccountBarItem, historyHomeBarItem, historyCartBarItem, historyHistoryBarItem, userHistoryBarItem, adminAccountBarItem, adminEditBarItem;
 	
-	Label historySelectedlbl, confirmationlbl, cartHoodieIdlbl2, cartHoodieNamelbl2, cartHoodiePricelbl2, cartHoodieQtylbl2, cartHoodieTotallPricelbl2, hoodieIdlbl, hoodieNamelbl, cartlbl, cartHoodieDetaillbl, cartSelectItemlbl, cartContactlbl, cartEmaillbl, cartPhonelbl, cartAddresslbl, cartTotalPricelbl, cartHoodieIdlbl, cartHoodieNamelbl, cartHoodiePricelbl, cartHoodieQtylbl, cartHoodieTotalPricelbl, selectItemHomelbl, loginlbl, usernameLoginlbl, passLoginlbl, registerlbl, emaillbl, usernameRegisterlbl, passRegisterlbl, confirmPasslbl, phoneNumberlbl, genderlbl, addresslbl, hoohdielbl, hoodieDetaillbl, hoodieIdHomelbl, hoodieNameHomelbl, hoodiePriceHomelbl, hoodieQtyHomelbl, hoodieTotalPriceHomelbl, selectItemlbl, selectAdminItemlbl, editProductlbl, updateDeletelbl, insertHoodielbl, adminNamelbl, adminPricelbl, hoodiePricelbl, editProductShowlbl, updateDeleteShowlbl, hoodieIdShowlbl, hoodieNameShowlbl, hoodiePriceShowlbl, insertHoodieShowlbl, adminNameShowlbl, adminPriceShowlbl,
+	Label historySelectedlbl, confirmationlbl, inputmoneylbl, cartHoodieIdlbl2, cartHoodieNamelbl2, cartHoodiePricelbl2, cartHoodieQtylbl2, cartHoodieTotallPricelbl2, hoodieIdlbl, hoodieNamelbl, cartlbl, cartHoodieDetaillbl, cartSelectItemlbl, cartContactlbl, cartEmaillbl, cartPhonelbl, cartAddresslbl, cartTotalPricelbl, cartHoodieIdlbl, cartHoodieNamelbl, cartHoodiePricelbl, cartHoodieQtylbl, cartHoodieTotalPricelbl, selectItemHomelbl, loginlbl, usernameLoginlbl, passLoginlbl, registerlbl, emaillbl, usernameRegisterlbl, passRegisterlbl, confirmPasslbl, phoneNumberlbl, genderlbl, addresslbl, hoohdielbl, hoodieDetaillbl, hoodieIdHomelbl, hoodieNameHomelbl, hoodiePriceHomelbl, hoodieQtyHomelbl, hoodieTotalPriceHomelbl, selectItemlbl, selectAdminItemlbl, editProductlbl, updateDeletelbl, insertHoodielbl, adminNamelbl, adminPricelbl, hoodiePricelbl, editProductShowlbl, updateDeleteShowlbl, hoodieIdShowlbl, hoodieNameShowlbl, hoodiePriceShowlbl, insertHoodieShowlbl, adminNameShowlbl, adminPriceShowlbl,
 			historyTransactionlbl, historyTransactionDetaillbl, historySelectlbl, historyTotalPricelbl;
-	TextField usernameLoginField, emailField, usernameRegisterField, phoneNumberField, hoodiePriceField, hoodiePriceShowField, adminNameField, adminPriceField, adminNameShowField, adminPriceShowField;
+	TextField usernameLoginField, moneyField, emailField, usernameRegisterField, phoneNumberField, hoodiePriceField, hoodiePriceShowField, adminNameField, adminPriceField, adminNameShowField, adminPriceShowField;
 	PasswordField passLoginField, passRegisterField, confirmPassRegisterField;
-	Button loginButton, registerButton, userAddButton, cartRemoveButton, cartCheckoutButton, paymentButton, cancelButton, adminInsertButton, adminUpdatePriceShowButton, adminDeleteHoodieShowButton, adminShowInsertButton, showtotalpricebutton;
+	Button loginButton, registerButton, userAddButton, cartRemoveButton, cartCheckoutButton, paymentButton, cancelButton, adminInsertButton, adminUpdatePriceShowButton, adminDeleteHoodieShowButton, adminShowInsertButton;
 	TextArea addressField;
 	
 	RadioButton maleRadio, femaleRadio;
@@ -71,7 +69,7 @@ public class Main extends Application{
 	Spinner<Integer> QtySpinner;
 	
 	Popup paymentConfirmation;
-	Window popup;
+	//Window popup;
 	
 	private TableView<User> UserTable;
 	TableColumn<User, String> userIdColumn;
@@ -161,22 +159,27 @@ public class Main extends Application{
 	
 	public void popup() {
 		Stage stage = new Stage();
-		popup = new Window("Payment Confirmation");
-		popup.setMinHeight(300);
-		popup.setMinHeight(200);
+	//	popup = new Window("Payment Confirmation");
+	//	popup.setMinHeight(300);
+	//	popup.setMinHeight(200);
 		
 		popupBP = new BorderPane();
 		popupGP = new GridPane();
 		popupFP = new FlowPane();
 		
 		confirmationlbl = new Label("Are you sure, you want to complete the payment?");
+		inputmoneylbl = new Label("Input your money : ");
 		paymentButton = new Button("Make Payment");
 		cancelButton = new Button("Cancel");
+		moneyField = new TextField();
 		
+//		
 		popupFP.getChildren().addAll(paymentButton, cancelButton);
 		
 		popupGP.add(confirmationlbl, 0, 0);
-		popupGP.add(popupFP, 0, 1);
+		popupGP.add(inputmoneylbl, 0, 1);
+		popupGP.add(moneyField, 0, 2);
+		popupGP.add(popupFP, 0, 3);
 		
 		Font confirmFont = Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 14);
 		confirmationlbl.setFont(confirmFont);
@@ -639,17 +642,14 @@ public class Main extends Application{
 		cartSceneGP1.add(cartlbl, 0, 0);
 		cartSceneGP1.add(CartTable, 0, 1);
 		
-		showtotalpricebutton = new Button("Show Total Price");
-		
 		cartSceneGP2.add(cartHoodieDetaillbl, 0, 0);
 		cartSceneGP2.add(cartSelectItemlbl, 0, 1);
 		cartSceneGP2.add(cartContactlbl, 0, 7);
 		cartSceneGP2.add(cartEmaillbl, 0, 8);
 		cartSceneGP2.add(cartPhonelbl, 0, 9);
 		cartSceneGP2.add(cartAddresslbl, 0, 10);
-		cartSceneGP2.add(showtotalpricebutton, 0, 11);
-		cartSceneGP2.add(cartHoodieTotalPricelbl, 0, 12);
-		cartSceneGP2.add(cartCheckoutButton, 0, 13);
+		cartSceneGP2.add(cartTotalPricelbl, 0, 11);
+		cartSceneGP2.add(cartCheckoutButton, 0, 12);
 		
 		cartSceneGP1.setVgap(30);
 		cartSceneGP1.setHgap(30);
@@ -683,25 +683,6 @@ public class Main extends Application{
 			cartHoodiePricelbl.setVisible(true);
 			cartHoodieQtylbl.setVisible(true);
 			cartRemoveButton.setVisible(true);
-			cartHoodieTotalPricelbl.setVisible(true);
-		});
-		
-		showtotalpricebutton.setOnMouseClicked(e -> {
-			String username2 = usernameLoginField.getText();
-			String password2 = passLoginField.getText();
-			String userID2 = connect.getUserID(username2, password2);
-			String query = "SELECT SUM(hoodie.HoodiePrice * cart.Quantity)FROM cart JOIN hoodie ON cart.HoodieID = hoodie.HoodieID WHERE UserID = " + "'" + userID2 + "'";
-			connect.rs = connect.execQuery(query);
-			System.out.println(query);
-			
-			try {
-				if (connect.rs.next()) {
-					double totalprice = connect.rs.getDouble(1);
-					cartHoodieTotalPricelbl.setText(String.format("Cart's Total Price : $%.2f", totalprice));
-				} 
-			} catch (Exception f) {
-				f.printStackTrace();
-			}
 			cartHoodieTotalPricelbl.setVisible(true);
 		});
 		
@@ -1150,59 +1131,17 @@ public class Main extends Application{
 			}
 			
 		});
-		for (int i = 0; i < HistoryTable2.getSelectionModel().getSelectedIndex(); i++) {
-			historyTotalPricelbl.setText("Total Price: " + HistoryTable2.getItems().get(i).getTotalPrice());
-		}
 		
-		HistoryTable1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Transaction>() {
+		totalPrice();
 
-			@Override
-			public void changed(ObservableValue<? extends Transaction> arg0, Transaction arg1, Transaction arg2) {
-				if (arg2 != null) {
-					String transactionid = arg2.getTransactionID();
-					getTransactionDetail(transactionid);
-					
-					try {
-						String query = "SELECT SUM(HoodiePrice * Quantity) AS TotalPrice FROM transactiondetail td JOIN hoodie h ON h.HoodieID = td.HoodieID WHERE TransactionID = " + "'" + transactionid + "'";;
-						connect.rs = connect.execQuery(query);
-						System.out.println(query);
-						if (connect.rs.next()) {
-							double totalprice = connect.rs.getDouble(1);
-							historyTotalPricelbl.setText(String.format("Total Price: $%.2f" , totalprice));								} 
-					} catch (Exception f) {
-						f.printStackTrace();
-					};
-				}
-				
-			}
-
-			private void getTransactionDetail(String transactionID) {
-				HistoryTable2.getItems().clear();
-				
-				String query = "SELECT TransactionID, td.HoodieID, HoodieName, Quantity, HoodiePrice * Quantity AS TotalPrice FROM transactiondetail td JOIN hoodie h ON td.HoodieID = h.HoodieID WHERE TransactionID = " + "'" + transactionID + "'";
-				connect.execQuery(query);
-				System.out.println(query);
-				
-				try {
-					while(connect.rs.next()) {
-						String transid = connect.rs.getString("TransactionID");
-						String hoodieid = connect.rs.getString("HoodieID");
-						String hoodiename = connect.rs.getString("HoodieName");
-						int quantity = connect.rs.getInt("Quantity");
-						double totalprice = connect.rs.getDouble("TotalPrice");
-						HistoryTable2.getItems().add(new Detail(transid, hoodieid, hoodiename, quantity, totalprice));
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
+	}
+	
+	public void totalPrice() {
+		HistoryTable2.setOnMouseClicked(e -> {
+			for (int i = 0; i < HistoryTable2.getSelectionModel().getSelectedIndex(); i++) {
+				historyTotalPricelbl.setText("Total Price: " + HistoryTable2.getItems().get(i).getTotalPrice());
 			}
 		});
-		
-		
-		
-		
-
 	}
 	
 	private void getAllDataUsername() {
@@ -1466,6 +1405,7 @@ public class Main extends Application{
 		getAllDataAdmin();
 		getAllDataTransactionHeader();
 		getAllDataTransactionDetail();
+		totalPrice();
 //		getAllDataCart();
 		insertData();
 		DeleteCart();
